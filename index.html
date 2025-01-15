@@ -1329,47 +1329,27 @@
           <div class="col-xl-6">
             <div class="contact-form-wraper">
               <div class="contact-info">
-                <form action="mail.php" method="POST" id="contact_form">
+                <form id="contactForm">
                   <div class="row">
                     <div class="col-xl-12">
-                      <div
-                        class="alert alert-success contact__msg"
-                        style="display: none"
-                        role="alert"
-                      >
-                        Message envoyé avec succés
+                      <div class="alert alert-success contact__msg" style="display: none" role="alert">
+                        Message envoyé avec succès
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-xl-6">
                       <div class="name">
-                        <input
-                          type="text"
-                          name="name"
-                          placeholder="Votre nom"
-                          required=""
-                        />
+                        <input type="text" name="from_name" placeholder="Votre nom" required="" />
                       </div>
                     </div>
                     <div class="col-xl-6">
                       <div class="email">
-                        <input
-                          type="email"
-                          name="email"
-                          placeholder="Votre adresse mail"
-                          required=""
-                        />
+                        <input type="email" name="from_email" placeholder="Votre adresse mail" required="" />
                       </div>
                     </div>
-
                     <div class="text-area">
-                      <textarea
-                        name="message"
-                        rows="7"
-                        placeholder="Votre message"
-                        required=""
-                      ></textarea>
+                      <textarea name="message" rows="7" placeholder="Votre message" required=""></textarea>
                     </div>
                     <div class="contact-btn">
                       <button class="button msg-btn">
@@ -1378,6 +1358,7 @@
                     </div>
                   </div>
                 </form>
+                <div id="responseMessage" style="margin-top: 20px;"></div>
               </div>
             </div>
           </div>
@@ -1467,6 +1448,29 @@
         console.log('callback - particles.js config loaded');
       });
     </script>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+      // Initialisation de EmailJS
+      emailjs.init("1ntpGAtQ6wrXFYZ5M"); // Remplacez par votre user ID EmailJS
 
+      // Gestion de l'événement de soumission du formulaire
+      document.getElementById("contactForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Empêche le rechargement de la page
+
+        const form = this;
+        const responseMessage = document.getElementById("responseMessage");
+
+        // Envoi du formulaire via EmailJS
+        emailjs.sendForm("service_z10wq7g", "template_cq2oj85", form)
+          .then(() => {
+            // Afficher un message de succès
+            responseMessage.innerHTML = "<p style='color: green;'>Message envoyé avec succès !</p>";
+            form.reset(); // Réinitialise le formulaire
+          }, (error) => {
+            // Afficher un message d'erreur
+            responseMessage.innerHTML = `<p style='color: red;'>Erreur lors de l'envoi : ${error.text}</p>`;
+          });
+      });
+    </script>
   </body>
 </html>
