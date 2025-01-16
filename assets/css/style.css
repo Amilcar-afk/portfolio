@@ -1864,3 +1864,7 @@ canvas {
 	display: flex;
 	justify-content: space-between;
 }
+
+.link-home {
+	z-index: 9;
+}
