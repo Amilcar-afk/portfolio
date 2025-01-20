@@ -71,7 +71,7 @@ $('.counterup').counterUp ({
 
 // Typed Text
 var typed = new Typed('.element', {
-  strings: ["Développeur Web","Développeur PHP","Développeur Symfony", "Développeur ReactJS"],
+  strings: ["Développeur Web","Développeur PHP","Développeur Symfony"],
   typeSpeed: 100,
   backSpeed: 100,
   backDelay: 1000,
